@@ -5,7 +5,7 @@ use strict;
 use warnings;
 use Carp;
 
-our $VERSION = "0.10";
+our $VERSION = "0.11";
 
 #--------------------------------------------------------------------------#
 # package variables
@@ -55,6 +55,17 @@ sub import {
         eval $evaltext;
         croak "$@" if $@;
     }
+
+    # import from a @EXPORT array in the ToolSet subclass
+    {
+        no strict 'refs';
+        for my $fcn ( @{"${class}::EXPORT"} ) {
+            my $source = "${class}::${fcn}";
+            die "Can't import missing subroutine $source"
+                if ! defined *{$source}{CODE};
+            *{"${caller}::${fcn}"} = \&{$source};
+        }
+    }
                 
 }
 
@@ -82,7 +93,7 @@ ToolSet - Load your commonly-used modules in a single import
 
 = VERSION
 
-This document describes ToolSet version 0.10
+This document describes ToolSet version 0.11
 
 = SYNOPSIS
 
@@ -96,11 +107,16 @@ Creating a ToolSet:
     ToolSet->set_strict(1);
     ToolSet->set_warnings(1);
 
+    # define exports from other modules
     ToolSet->export(
         'Carp'          => undef,       # get the defaults
         'Scalar::Util'  => 'refaddr',   # or a specific list
     );
 
+    # define exports from this module
+    our @EXPORT = qw( shout );
+    sub shout { print uc shift };
+    
     1; # modules must be true
 
 Using a ToolSet:
@@ -114,7 +130,8 @@ Using a ToolSet:
     # Carp and refaddr are imported
     
     carp "We can carp!";
-    print refaddr []; 
+    print refaddr [];
+    shout "We can shout, too!";
   
 = DESCRIPTION
 
@@ -142,6 +159,14 @@ subclass.
     use base 'ToolSet';
     
 ToolSet must be used as a base class.
+
+== {@EXPORT}
+
+    our @EXPORT = qw( shout };
+    sub shout { print uc shift }
+
+Functions defined in the ToolSet subclass can be exported by default during
+{use()} by listing them in an {@EXPORT} array.
 
 == {export}
 
@@ -189,6 +214,9 @@ Additional error messages include:
 
 * {"Invalid import specification for MODULE"} -- an incorrect type was
 provided for the list to be imported (e.g. a hash reference)
+
+* {"Can't import missing subroutine NAME"} -- the named subroutine is listed in
+{@EXPORT}, but is not defined in the ToolSet subclass
 
 = CONFIGURATION AND ENVIRONMENT
 

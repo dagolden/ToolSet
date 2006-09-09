@@ -1,6 +1,6 @@
----
+--- #YAML:1.0
 name: ToolSet
-version: 0.10
+version: 0.11
 author:
   - David A Golden <dagolden@cpan.org>
 abstract: Load your commonly-used modules in a single import
@@ -20,7 +20,7 @@ build_requires:
 provides:
   ToolSet:
     file: lib/ToolSet.pm
-    version: 0.10
+    version: 0.11
   ToolSet::SWC:
     file: lib/ToolSet/SWC.pm
     version: 0.10

@@ -2,14 +2,19 @@ Build.PL
 Changes
 INSTALL
 lib/ToolSet.pm
+lib/ToolSet.pod
 lib/ToolSet/SWC.pm
+lib/ToolSet/SWC.pod
 LICENSE
 MANIFEST			This list of files
+META.yml
+README
 t/00-load.t
 t/01-api.t
 t/02-strictures.t
 t/03-warnings.t
 t/04-export.t
+t/05-self-export.t
 t/50-SWC.t
 t/98-pod.t
 t/99-pod-coverage.t
@@ -24,10 +29,8 @@ t/ToolSet/ExportBadType.pm
 t/ToolSet/ExportFails.pm
 t/ToolSet/ExportFails2.pm
 t/ToolSet/Null.pm
+t/ToolSet/SelfExport.pm
+t/ToolSet/SelfExportFails.pm
 t/ToolSet/StrictWarn.pm
 t/Util.pm
 Todo
-lib/ToolSet/SWC.pod
-lib/ToolSet.pod
-README
-META.yml

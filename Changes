@@ -1,5 +1,9 @@
 Revision history for ToolSet
 
+0.11 in progress
+    - adds support for @EXPORT to list functions that ToolSet 
+      will export by default
+
 0.10 Sat Oct 22 17:14:21 EDT 2005
     - set_strict() added
     - set_warnings() added
