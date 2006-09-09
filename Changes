@@ -1,6 +1,6 @@
 Revision history for ToolSet
 
-0.12 
+0.12 Sun Dec  4 23:45:35 EST 2005
     - fixed Build.PL generation of Makefile.PL
 
 0.11 Tue Oct 25 06:42:25 EDT 2005
