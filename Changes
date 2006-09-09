@@ -1,5 +1,8 @@
 Revision history for ToolSet
 
+0.13 in progress
+    - made pod/pod_coverage author tests skip by default
+
 0.12 Sun Dec  4 23:45:35 EST 2005
     - fixed Build.PL generation of Makefile.PL
 
