@@ -91,10 +91,6 @@ __END__
 
 ToolSet - Load your commonly-used modules in a single import
 
-= VERSION
-
-This document describes ToolSet version 0.11
-
 = SYNOPSIS
 
 Creating a ToolSet:

@@ -22,10 +22,6 @@ __END__
 
 ToolSet::SWC - Sample toolset with strict, warnings and Carp
 
-= VERSION
-
-This document describes ToolSet::SWC version 0.10
-
 = SYNOPSIS
 
     use ToolSet::SWC;
