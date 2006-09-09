@@ -1,4 +1,4 @@
---- #YAML:1.0
+---
 name: ToolSet
 version: 0.11
 author:
@@ -23,5 +23,5 @@ provides:
     version: 0.11
   ToolSet::SWC:
     file: lib/ToolSet/SWC.pm
-    version: 0.10
+    version: 0.11
 generated_by: Module::Build version 0.2703

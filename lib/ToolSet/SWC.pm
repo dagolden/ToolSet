@@ -1,6 +1,6 @@
 package ToolSet::SWC;
 
-our $VERSION = "0.10";
+our $VERSION = "0.11";
 
 use base 'ToolSet';
 

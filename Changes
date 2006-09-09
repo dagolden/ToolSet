@@ -1,6 +1,6 @@
 Revision history for ToolSet
 
-0.11 in progress
+0.11 Tue Oct 25 06:42:25 EDT 2005
     - adds support for @EXPORT to list functions that ToolSet 
       will export by default
 
