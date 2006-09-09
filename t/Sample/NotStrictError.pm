@@ -1,6 +1,6 @@
 package t::Sample::NotStrictError;
 
-use t::ToolBox::StrictWarn;
+use t::ToolSet::StrictWarn;
 
 $var = 42;
 $var++;

@@ -1,6 +1,6 @@
 package t::Sample::NotStrict;
 
-use t::ToolBox::Null;
+use t::ToolSet::Null;
 
 $var = 42;
 $var++;

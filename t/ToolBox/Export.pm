@@ -1,7 +1,7 @@
-package t::ToolBox::Export;
-use base 'ToolBox';
+package t::ToolSet::Export;
+use base 'ToolSet';
 
-ToolBox->export(
+ToolSet->export(
     'Carp' => undef,
     'Getopt::Std' => '',
     'Text::Wrap' => [],

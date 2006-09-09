@@ -1,7 +1,7 @@
-Revision history for ToolBox
+Revision history for ToolSet
 
 0.10 Sat Oct 22 17:14:21 EDT 2005
     - set_strict() added
     - set_warnings() added
     - export() added
-    - sample ToolBox::SWC added
+    - sample ToolSet::SWC added

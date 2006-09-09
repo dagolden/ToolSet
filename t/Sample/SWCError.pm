@@ -1,6 +1,6 @@
 package t::Sample::SWCError;
 
-use ToolBox::SWC;
+use ToolSet::SWC;
 
 $var = 0;
 $var++;

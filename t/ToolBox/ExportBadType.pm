@@ -1,7 +1,7 @@
-package t::ToolBox::ExportBadType;
-use base 'ToolBox';
+package t::ToolSet::ExportBadType;
+use base 'ToolSet';
 
-ToolBox->export(
+ToolSet->export(
     'Carp' => {},
 );
 

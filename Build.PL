@@ -45,10 +45,10 @@ my $class = Module::Build->subclass(
 SUBCLASS
 
 my $builder = $class->new(
-    module_name         => 'ToolBox',
+    module_name         => 'ToolSet',
     license             => 'perl',
     dist_author         => 'David A Golden <dagolden@cpan.org>',
-    dist_version_from   => 'lib/ToolBox.pm',
+    dist_version_from   => 'lib/ToolSet.pm',
     create_readme       => 1,
     create_makefile     => 'traditional',
     requires => {
@@ -63,7 +63,7 @@ my $builder = $class->new(
         'Test::More'            => 0,
         'Text::Wrap'            => 0,
     },
-    add_to_cleanup      => [ 'ToolBox-*' ],
+    add_to_cleanup      => [ 'ToolSet-*' ],
 );
 
 $builder->create_build_script();

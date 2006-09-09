@@ -3,7 +3,7 @@ use lib '.';
 use Test::More tests => 20;
 use t::Util; # gives us cant_ok()
 
-BEGIN { use_ok( "t::ToolBox::Export" ) }
+BEGIN { use_ok( "t::ToolSet::Export" ) }
 
 # 'Carp' => undef
 can_ok( "main", "carp" );
@@ -33,18 +33,18 @@ can_ok( "main", "rmtree" );
 cant_ok( "main", "mkpath" );
 
 # Test error handling if module not found
-eval " use t::ToolBox::ExportFails ";
+eval " use t::ToolSet::ExportFails ";
 like( "$@", qr{Can't locate Bogus/Module.pm in \@INC},
     "Missing module throws error (no args)"
 );
 # Ditto but with an argument to module
-eval " use t::ToolBox::ExportFails2 ";
+eval " use t::ToolSet::ExportFails2 ";
 like( "$@", qr{Can't locate Bogus/Module.pm in \@INC},
     "Missing module throws error (arg style)"
 );
 
 # Test error handling for bad value type
-eval " use t::ToolBox::ExportBadType ";
+eval " use t::ToolSet::ExportBadType ";
 like( "$@", qr{Invalid import specification for Carp},
     "Invalid import spec throws error"
 );

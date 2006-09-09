@@ -1,6 +1,6 @@
 package t::Sample::SWC;
 
-use ToolBox::SWC;
+use ToolSet::SWC;
 
 carp "We can carp";
 

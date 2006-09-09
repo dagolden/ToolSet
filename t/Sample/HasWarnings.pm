@@ -1,6 +1,6 @@
 package t::Sample::HasWarnings;
 
-use t::ToolBox::StrictWarn;
+use t::ToolSet::StrictWarn;
 
 my $var = "";
 $var = $var + 1; # should warn

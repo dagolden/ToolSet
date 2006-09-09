@@ -1,14 +1,14 @@
-package ToolBox::SWC;
+package ToolSet::SWC;
 
 our $VERSION = "0.10";
 
-use base 'ToolBox';
+use base 'ToolSet';
 
-ToolBox->set_strict(1);
+ToolSet->set_strict(1);
 
-ToolBox->set_warnings(1);
+ToolSet->set_warnings(1);
 
-ToolBox->export(
+ToolSet->export(
     'Carp' => undef,
 );
 
@@ -19,15 +19,15 @@ __END__
 
 = NAME
 
-ToolBox::SWC - Sample toolbox with strict, warnings and Carp
+ToolSet::SWC - Sample toolset with strict, warnings and Carp
 
 = VERSION
 
-This document describes ToolBox::SWC version 0.10
+This document describes ToolSet::SWC version 0.10
 
 = SYNOPSIS
 
-    use ToolBox::SWC;
+    use ToolSet::SWC;
     
     # strict is on
     # warnings are on
@@ -39,8 +39,8 @@ This document describes ToolBox::SWC version 0.10
   
 = DESCRIPTION
 
-ToolBox:SWC is a simple example of a ToolBox that enables strict and warnings
-and also imports all the basic [Carp] functions. See [ToolBox] for more
+ToolSet:SWC is a simple example of a ToolSet that enables strict and warnings
+and also imports all the basic [Carp] functions. See [ToolSet] for more
 details.
 
 = BUGS AND LIMITATIONS
@@ -48,7 +48,7 @@ details.
 No bugs have been reported.
 
 Please report any bugs or feature requests at
-{bug-toolbox@rt.cpan.org}, or through the web interface at
+{bug-toolset@rt.cpan.org}, or through the web interface at
 [http://rt.cpan.org].
 
 When submitting a bug or request, please include a test-file or a patch to an

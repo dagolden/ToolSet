@@ -1,4 +1,4 @@
-package ToolBox;
+package ToolSet;
 
 use 5.006;
 use strict;
@@ -78,32 +78,32 @@ __END__
 
 = NAME
 
-ToolBox - Load your commonly-used modules in a single import
+ToolSet - Load your commonly-used modules in a single import
 
 = VERSION
 
-This document describes ToolBox version 0.10
+This document describes ToolSet version 0.10
 
 = SYNOPSIS
 
-Creating a toolbox:
+Creating a ToolSet:
 
     # My/Tools.pm
     package My::Tools;
 
-    use base 'ToolBox'; 
+    use base 'ToolSet'; 
     
-    ToolBox->set_strict(1);
-    ToolBox->set_warnings(1);
+    ToolSet->set_strict(1);
+    ToolSet->set_warnings(1);
 
-    ToolBox->export(
+    ToolSet->export(
         'Carp'          => undef,       # get the defaults
         'Scalar::Util'  => 'refaddr',   # or a specific list
     );
 
     1; # modules must be true
 
-Using a toolbox:
+Using a ToolSet:
 
     # my_script.pl
     
@@ -118,20 +118,20 @@ Using a toolbox:
   
 = DESCRIPTION
 
-ToolBox provides a mechanism for creating logical bundles of modules that can
-be treated as a single, reusable "toolbox" that is imported as one.  Unlike
-CPAN bundles, which specify modules to be installed together, a toolbox
+ToolSet provides a mechanism for creating logical bundles of modules that can
+be treated as a single, reusable toolset that is imported as one.  Unlike
+CPAN bundles, which specify modules to be installed together, a toolset
 specifies modules to be imported together into other code.  
 
-ToolBox is designed to be a superclass -- subclasses will specify specific
-modules to bundle.  ToolBox supports custom import lists for each included
+ToolSet is designed to be a superclass -- subclasses will specify specific
+modules to bundle.  ToolSet supports custom import lists for each included
 module and even supports the {strict} and {warnings} pragmas, optionally
-enabling those pragmas when the ToolBox subclass is used.
+enabling those pragmas when the ToolSet subclass is used.
 
-A ToolBox module does not physically bundle the component modules, but rather
+A ToolSet module does not physically bundle the component modules, but rather
 specifies lists of modules to be used together and import specifications for
 each.  By adding the component modules to a prerequisites list in a
-{Makefile.PL} or {Build.PL} for a ToolBox subclass, an entire dependency chain
+{Makefile.PL} or {Build.PL} for a ToolSet subclass, an entire dependency chain
 can be managed as a single unit across scripts or distributions that use the
 subclass.
 
@@ -139,13 +139,13 @@ subclass.
 
 == Setting up
 
-    use base 'ToolBox';
+    use base 'ToolSet';
     
-ToolBox must be used as a base class.
+ToolSet must be used as a base class.
 
 == {export}
 
-    ToolBox->export(
+    ToolSet->export(
         'Carp' => undef,                    
         'Scalar::Util' => 'refaddr',
     );
@@ -168,21 +168,21 @@ elements may not themselves contain spaces or unexpected results will occur.
 
 == {set_strict}
 
-  ToolBox->set_strict(1);
-  ToolBox->set_strict(0); # default
+  ToolSet->set_strict(1);
+  ToolSet->set_strict(0); # default
 
 Determines whether strict will enabled for modules that {use()} this one.
 
 == {set_warnings}
 
-  ToolBox->set_warnings(1);
-  ToolBox->set_warnings(0); # default
+  ToolSet->set_warnings(1);
+  ToolSet->set_warnings(0); # default
 
 Determines whether warnings will enabled for modules that {use()} this one.
 
 = DIAGNOSTICS
 
-ToolBox will report an error for a module that cannot be found just like an
+ToolSet will report an error for a module that cannot be found just like an
 ordinary call to {use()} or {require()}.
 
 Additional error messages include:
@@ -192,11 +192,11 @@ provided for the list to be imported (e.g. a hash reference)
 
 = CONFIGURATION AND ENVIRONMENT
 
-ToolBox requires no configuration files or environment variables.
+ToolSet requires no configuration files or environment variables.
 
 = DEPENDENCIES
 
-ToolBox requires at least Perl 5.6.  ToolBox subclasses will, of course, be
+ToolSet requires at least Perl 5.6.  ToolSet subclasses will, of course, be
 dependent on any modules they load.
 
 = INCOMPATIBILITIES
@@ -218,7 +218,7 @@ are compiled.
 No bugs have been reported.
 
 Please report any bugs or feature requests at
-{bug-toolbox@rt.cpan.org}, or through the web interface at
+{bug-toolset@rt.cpan.org}, or through the web interface at
 [http://rt.cpan.org].
 
 When submitting a bug or request, please include a test-file or a patch to an

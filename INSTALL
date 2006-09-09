@@ -1,6 +1,6 @@
 INSTALLATION INSTRUCTIONS
 
-To install ToolBox, from the top distribution directory:
+To install ToolSet, from the top distribution directory:
 
   perl Build.PL
   perl Build

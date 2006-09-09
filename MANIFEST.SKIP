@@ -35,4 +35,4 @@
 #   Mac OSX SMB mount metadata files
 \b\._
 # Avoid archives of this distribution
-\bToolBox-[\d\.\_]+
+\bToolSet-[\d\.\_]+

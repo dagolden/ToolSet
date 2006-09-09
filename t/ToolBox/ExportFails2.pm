@@ -1,7 +1,7 @@
-package t::ToolBox::ExportFails2;
-use base 'ToolBox';
+package t::ToolSet::ExportFails2;
+use base 'ToolSet';
 
-ToolBox->export(
+ToolSet->export(
     'Bogus::Module' => [],
 );
 

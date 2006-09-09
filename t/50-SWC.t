@@ -30,13 +30,13 @@ sub check_warning {
 # Catch warning
 require t::Sample::SWC;
 like( check_warning(), qr/^We can carp/,
-    "ToolBox::SWC carping works" 
+    "ToolSet::SWC carping works" 
 );
 
 eval "use t::Sample::SWCError; ";
 
 like( "$@", qr/^Global symbol "\$var" requires explicit package name/, 
-    "ToolBox::SWC sets strict"
+    "ToolSet::SWC sets strict"
 );
 
 

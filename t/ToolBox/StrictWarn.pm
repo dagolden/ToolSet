@@ -1,7 +1,7 @@
-package t::ToolBox::StrictWarn;
-use base 'ToolBox';
+package t::ToolSet::StrictWarn;
+use base 'ToolSet';
 
-ToolBox->set_strict(1);
-ToolBox->set_warnings(1);
+ToolSet->set_strict(1);
+ToolSet->set_warnings(1);
 
 1; # return true

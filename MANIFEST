@@ -1,10 +1,10 @@
 Build.PL
 Changes
 INSTALL
-lib/ToolBox.pm
-lib/ToolBox.pod
-lib/ToolBox/SWC.pm
-lib/ToolBox/SWC.pod
+lib/ToolSet.pm
+lib/ToolSet.pod
+lib/ToolSet/SWC.pm
+lib/ToolSet/SWC.pod
 LICENSE
 MANIFEST			This list of files
 META.yml
@@ -23,11 +23,11 @@ t/Sample/NotStrict.pm
 t/Sample/NotStrictError.pm
 t/Sample/SWC.pm
 t/Sample/SWCError.pm
-t/ToolBox/Export.pm
-t/ToolBox/ExportBadType.pm
-t/ToolBox/ExportFails.pm
-t/ToolBox/ExportFails2.pm
-t/ToolBox/Null.pm
-t/ToolBox/StrictWarn.pm
+t/ToolSet/Export.pm
+t/ToolSet/ExportBadType.pm
+t/ToolSet/ExportFails.pm
+t/ToolSet/ExportFails2.pm
+t/ToolSet/Null.pm
+t/ToolSet/StrictWarn.pm
 t/Util.pm
 Todo

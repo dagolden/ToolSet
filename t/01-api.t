@@ -2,13 +2,13 @@
 use Test::More tests => 5;
 use lib '.';
 
-BEGIN { use_ok( "t::ToolBox::Null" ); }
+BEGIN { use_ok( "t::ToolSet::Null" ); }
 
-# ToolBox API
-can_ok( "ToolBox", "set_strict" );
-can_ok( "ToolBox", "set_warnings" );
-can_ok( "ToolBox", "export" );
+# ToolSet API
+can_ok( "ToolSet", "set_strict" );
+can_ok( "ToolSet", "set_warnings" );
+can_ok( "ToolSet", "export" );
 
 # Available in subclass
-can_ok( "t::ToolBox::Null", "import" );
+can_ok( "t::ToolSet::Null", "import" );
 

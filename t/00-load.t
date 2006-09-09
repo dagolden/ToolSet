@@ -1,8 +1,8 @@
 use Test::More tests => 2;
 
 BEGIN {
-use_ok( 'ToolBox' );
-use_ok( 'ToolBox::SWC' );
+use_ok( 'ToolSet' );
+use_ok( 'ToolSet::SWC' );
 }
 
-diag( "Testing ToolBox $ToolBox::VERSION" );
+diag( "Testing ToolSet $ToolSet::VERSION" );
