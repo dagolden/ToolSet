@@ -30,6 +30,20 @@ my $class = Module::Build->subclass(
         }
     }
 
+    sub ACTION_test {
+        my $self = shift;
+        my $missing_pod;
+        for my $src ( keys %{ $self->find_pm_files() } ) {
+            (my $tgt = $src) =~ s{\.pm$}{.pod};
+            $missing_pod = 1 if ! -e $tgt;
+        }
+        if ( $missing_pod ) {
+            $self->depends_on('wikidoc');
+            $self->depends_on('build');
+        }
+        $self->SUPER::ACTION_test;
+    }
+
     sub ACTION_testpod {
         my $self = shift;
         $self->depends_on('wikidoc');
