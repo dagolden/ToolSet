@@ -67,8 +67,7 @@ my $builder = $class->new(
     create_makefile_pl  => 'traditional',
     requires => {
         perl            => 5.006,
-    },
-    build_requires => {
+        # build requires (should all be core)
         'Cwd'                   => 0,
         'Getopt::Std'           => 0,
         'File::Basename'        => 0,
