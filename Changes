@@ -1,5 +1,8 @@
 Revision history for ToolSet
 
+0.12 
+    - fixed Build.PL generation of Makefile.PL
+
 0.11 Tue Oct 25 06:42:25 EDT 2005
     - adds support for @EXPORT to list functions that ToolSet 
       will export by default

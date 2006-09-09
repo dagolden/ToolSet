@@ -1,6 +1,6 @@
 ---
 name: ToolSet
-version: 0.11
+version: 0.12
 author:
   - David A Golden <dagolden@cpan.org>
 abstract: Load your commonly-used modules in a single import
@@ -20,8 +20,8 @@ build_requires:
 provides:
   ToolSet:
     file: lib/ToolSet.pm
-    version: 0.11
+    version: 0.12
   ToolSet::SWC:
     file: lib/ToolSet/SWC.pm
-    version: 0.11
+    version: 0.12
 generated_by: Module::Build version 0.2703

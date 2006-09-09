@@ -34,3 +34,4 @@ t/ToolSet/SelfExportFails.pm
 t/ToolSet/StrictWarn.pm
 t/Util.pm
 Todo
+Makefile.PL

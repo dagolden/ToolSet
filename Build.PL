@@ -64,7 +64,7 @@ my $builder = $class->new(
     dist_author         => 'David A Golden <dagolden@cpan.org>',
     dist_version_from   => 'lib/ToolSet.pm',
     create_readme       => 1,
-    create_makefile     => 'traditional',
+    create_makefile_pl  => 'traditional',
     requires => {
         perl            => 5.006,
     },
