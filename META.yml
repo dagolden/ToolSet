@@ -1,0 +1,27 @@
+---
+name: ToolBox
+version: 0.10
+author:
+  - David A Golden <dagolden@cpan.org>
+abstract: Load your commonly-used modules in a single import
+license: perl
+resources:
+  license: http://dev.perl.org/licenses/
+requires:
+  Test::More: 0
+  perl: 5.006
+build_requires:
+  Cwd: 0
+  File::Basename: 0
+  File::Path: 0
+  File::Spec::Functions: 0
+  Getopt::Std: 0
+  Text::Wrap: 0
+provides:
+  ToolBox:
+    file: lib/ToolBox.pm
+    version: 0.10
+  ToolBox::SWC:
+    file: lib/ToolBox/SWC.pm
+    version: 0.10
+generated_by: Module::Build version 0.2703

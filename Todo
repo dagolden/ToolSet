@@ -1,0 +1,6 @@
+Todo list for ToolBox
+
+- add support for export_ok(), export_lazy() and export_tags functions
+
+- add support for own @EXPORT and @EXPORT_OK arrays for custom functions in the
+  toolbox

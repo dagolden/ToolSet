@@ -1,0 +1,17 @@
+INSTALLATION INSTRUCTIONS
+
+To install ToolBox, from the top distribution directory:
+
+  perl Build.PL
+  perl Build
+  perl Build test
+  perl Build install
+
+If Module::Build is not installed, use make:
+
+  perl Makefile.PL
+  make
+  make test
+  make install
+
+On Windows, use nmake instead of make.
