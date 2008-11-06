@@ -1,29 +1,29 @@
 ---
 name: ToolSet
-version: 0.13
+version: 0.14
 author:
-  - David A Golden <dagolden@cpan.org>
+  - 'David Golden <dagolden@cpan.org>'
 abstract: Load your commonly-used modules in a single import
-license: perl
+license: apache
 resources:
-  license: http://dev.perl.org/licenses/
+  license: http://apache.org/licenses/LICENSE-2.0
 requires:
-  Cwd: 0
-  File::Basename: 0
-  File::Path: 0
-  File::Spec::Functions: 0
-  Getopt::Std: 0
-  Test::More: 0
-  Text::Wrap: 0
   perl: 5.006
+build_requires:
+  Test::More: 0.47
 provides:
   ToolSet:
     file: lib/ToolSet.pm
-    version: 0.13
+    version: 0.14
   ToolSet::SWC:
     file: lib/ToolSet/SWC.pm
-    version: 0.13
-generated_by: Module::Build version 0.28
+    version: 0.14
+generated_by: Module::Build version 0.3
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.2.html
   version: 1.2
+no_index:
+  directory:
+    - examples
+    - inc
+    - t

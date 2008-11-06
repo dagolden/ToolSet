@@ -1,82 +1,33 @@
+# Copyright (c) 2008 by David Golden. All rights reserved.
+# Licensed under Apache License, Version 2.0 (the "License").
+# You may not use this file except in compliance with the License.
+# A copy of the License was distributed with this file or you may obtain a 
+# copy of the License from http://www.apache.org/licenses/LICENSE-2.0
+
+use 5.006;
 use strict;
 use warnings;
-use Module::Build;
-use File::Spec;
-
-my $class = Module::Build->subclass(
-    class => "Module::Build::WikiDoc",
-    code => <<'SUBCLASS', );
-
-    sub ACTION_wikidoc {
-        my $self = shift;
-        eval "use Pod::WikiDoc";
-        if ( $@ eq '' ) {
-            my $parser = Pod::WikiDoc->new( 
-                { comment_blocks => 1 } 
-            );
-            for my $src ( keys %{ $self->find_pm_files() } ) {
-                (my $tgt = $src) =~ s{\.pm$}{.pod};
-                $parser->filter( {
-                    input   => $src,
-                    output  => $tgt,
-                });
-                print "Creating $tgt\n";
-                $tgt =~ s{\\}{/}g;
-                $self->_add_to_manifest( 'MANIFEST', $tgt );
-            }
-        }
-        else {
-            warn "Pod::WikiDoc not available. Skipping wikidoc.\n";
-        }
-    }
-
-    sub ACTION_test {
-        my $self = shift;
-        my $missing_pod;
-        for my $src ( keys %{ $self->find_pm_files() } ) {
-            (my $tgt = $src) =~ s{\.pm$}{.pod};
-            $missing_pod = 1 if ! -e $tgt;
-        }
-        if ( $missing_pod ) {
-            $self->depends_on('wikidoc');
-            $self->depends_on('build');
-        }
-        $self->SUPER::ACTION_test;
-    }
-
-    sub ACTION_testpod {
-        my $self = shift;
-        $self->depends_on('wikidoc');
-        $self->SUPER::ACTION_testpod;
-    }
-
-    sub ACTION_distdir {
-        my $self = shift;
-        $self->depends_on('wikidoc');
-        $self->SUPER::ACTION_distdir;
-    }
-
-SUBCLASS
-
-my $builder = $class->new(
-    module_name         => 'ToolSet',
-    license             => 'perl',
-    dist_author         => 'David A Golden <dagolden@cpan.org>',
-    dist_version_from   => 'lib/ToolSet.pm',
-    create_readme       => 1,
+use lib 'inc';
+eval "require Pod::WikiDoc";
+my $class = $@ ? "Module::Build" : "Module::Build::WikiDoc";
+eval "require $class";
+my $build = $class->new( 
+    module_name => 'ToolSet',
+    dist_author => 'David Golden <dagolden@cpan.org>',
+    license => 'apache',
+    create_readme => 1,
     create_makefile_pl  => 'traditional',
     requires => {
-        perl            => 5.006,
-        # build requires (should all be core)
-        'Cwd'                   => 0,
-        'Getopt::Std'           => 0,
-        'File::Basename'        => 0,
-        'File::Path'            => 0,
-        'File::Spec::Functions' => 0,
-        'Test::More'            => 0,
-        'Text::Wrap'            => 0,
+        'perl' => '5.006',
     },
-    add_to_cleanup      => [ 'ToolSet-*' ],
+    build_requires => {
+        'Test::More' => 0.47,
+    },
+    meta_add            => { 
+        no_index => { 
+            directory => [ qw/ examples inc t /],
+        } 
+    },
 );
+$build->create_build_script;
 
-$builder->create_build_script();
