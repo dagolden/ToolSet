@@ -8,8 +8,11 @@ license: apache
 resources:
   license: http://apache.org/licenses/LICENSE-2.0
 requires:
+  Carp: 0
+  base: 0
   perl: 5.006
 build_requires:
+  Exporter: 0
   Test::More: 0.47
 provides:
   ToolSet:

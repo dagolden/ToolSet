@@ -18,10 +18,13 @@ my $build = $class->new(
     create_readme => 1,
     create_makefile_pl  => 'traditional',
     requires => {
-        'perl' => '5.006',
+      'perl' => 5.006,
+      'base' => 0, 
+      'Carp' => 0,
     },
     build_requires => {
-        'Test::More' => 0.47,
+      'Exporter' => 0,
+      'Test::More' => 0.47, 
     },
     meta_add            => { 
         no_index => { 

@@ -1,5 +1,8 @@
 Revision history for ToolSet
 
+0.14 Thu Nov  6 17:26:10 EST 2008
+    - Added: support for feature.pm in Perl 5.10
+
 0.13 Tue May 23 00:09:22 EDT 2006
     - made pod/pod_coverage author tests skip by default
     - removed always-out-of-date version info from Pod

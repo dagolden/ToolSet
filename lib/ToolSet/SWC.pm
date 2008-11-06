@@ -22,6 +22,10 @@ __END__
 
 ToolSet::SWC - Sample toolset with strict, warnings and Carp
 
+= VERSION
+
+This documentation describes version %%VERSION%%.
+
 = SYNOPSIS
 
     use ToolSet::SWC;

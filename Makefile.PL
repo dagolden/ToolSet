@@ -9,7 +9,10 @@ WriteMakefile
           'EXE_FILES' => [],
           'VERSION_FROM' => 'lib/ToolSet.pm',
           'PREREQ_PM' => {
-                           'Test::More' => '0.47'
+                           'base' => 0,
+                           'Test::More' => '0.47',
+                           'Exporter' => 0,
+                           'Carp' => 0
                          }
         )
 ;

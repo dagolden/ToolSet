@@ -13,6 +13,7 @@ our $VERSION = '0.14';
 
 my %use_strict;
 my %use_warnings;
+my %use_feature;
 my %exports_of;
 
 #--------------------------------------------------------------------------#
@@ -36,6 +37,10 @@ sub import {
     if ( $use_warnings{ $class } ) {
         require warnings;
         warnings->import;
+    }
+    if ( $use_feature{ $class } ) {
+        require feature;
+        feature->import( $use_feature{ $class } );
     }
     while ( my ( $mod, $request ) = each %{ $exports_of{ $class } } ) {
         my $evaltext;
@@ -81,6 +86,12 @@ sub set_warnings {
     $use_warnings{ $caller } = $value || 0;
 }
 
+sub set_feature {
+    my ($class, $value) = @_;
+    my $caller = caller;
+    $use_feature{ $caller } = $value || '';
+}
+
 
 1; # Magic true value required at end of module
 __END__
@@ -90,6 +101,10 @@ __END__
 = NAME
 
 ToolSet - Load your commonly-used modules in a single import
+
+= VERSION
+
+This documentation describes version %%VERSION%%.
 
 = SYNOPSIS
 
@@ -102,6 +117,7 @@ Creating a ToolSet:
     
     ToolSet->set_strict(1);
     ToolSet->set_warnings(1);
+    ToolSet->set_feature( qw/say switch/ ); # perl 5.10
 
     # define exports from other modules
     ToolSet->export(
@@ -186,6 +202,14 @@ provided to {use()}:
     
 Elements in an array are passed to {use()} as a white-space separated list, so
 elements may not themselves contain spaces or unexpected results will occur.
+
+== {set_feature}
+
+  ToolSet->set_feature( ":5.10" );
+  ToolSet->set_feature( qw/say switch/ );
+
+For Perl 5.10 or later, enables newer language features in modules the {use()} 
+this one.
 
 == {set_strict}
 

@@ -6,6 +6,10 @@
 
 ToolSet - Load your commonly-used modules in a single import
 
+=head1 VERSION
+
+This documentation describes version 0.14.
+
 =head1 SYNOPSIS
 
 Creating a ToolSet:
@@ -17,6 +21,7 @@ Creating a ToolSet:
  
      ToolSet->set_strict(1);
      ToolSet->set_warnings(1);
+     ToolSet->set_feature( qw/say switch/ ); # perl 5.10
  
      # define exports from other modules
      ToolSet->export(
@@ -101,6 +106,14 @@ provided to C<<< use() >>>:
 
 Elements in an array are passed to C<<< use() >>> as a white-space separated list, so
 elements may not themselves contain spaces or unexpected results will occur.
+
+=head2 C<<< set_feature >>>
+
+   ToolSet->set_feature( ":5.10" );
+   ToolSet->set_feature( qw/say switch/ );
+
+For Perl 5.10 or later, enables newer language features in modules the C<<< use() >>> 
+this one.
 
 =head2 C<<< set_strict >>>
 

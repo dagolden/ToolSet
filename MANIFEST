@@ -3,10 +3,14 @@ Changes
 inc/Module/Build/WikiDoc.pm
 INSTALL
 lib/ToolSet.pm
+lib/ToolSet.pod
 lib/ToolSet/SWC.pm
+lib/ToolSet/SWC.pod
 LICENSE
+Makefile.PL
 MANIFEST
 MANIFEST.SKIP
+META.yml
 README
 t/00-load.t
 t/01-api.t
@@ -14,9 +18,9 @@ t/02-strictures.t
 t/03-warnings.t
 t/04-export.t
 t/05-self-export.t
+t/06-feature.t
 t/50-SWC.t
-t/98-pod.t
-t/99-pod-coverage.t
+t/Sample/HasFeature.pm
 t/Sample/HasWarnings.pm
 t/Sample/IgnoreWarnings.pm
 t/Sample/NotStrict.pm
@@ -31,6 +35,7 @@ t/ToolSet/Null.pm
 t/ToolSet/SelfExport.pm
 t/ToolSet/SelfExportFails.pm
 t/ToolSet/StrictWarn.pm
+t/ToolSet/UseFeature.pm
 t/Util.pm
 Todo
 xt/critic.t
@@ -39,7 +44,3 @@ xt/pod-coverage.t
 xt/pod-format.t
 xt/spelling.t
 xt/stopwords.txt
-lib/ToolSet/SWC.pod
-lib/ToolSet.pod
-Makefile.PL
-META.yml
