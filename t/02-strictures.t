@@ -1,4 +1,3 @@
-#!perl -T
 use lib '.';
 use Test::More tests => 2;
 

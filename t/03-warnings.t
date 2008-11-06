@@ -1,4 +1,3 @@
-#!perl -T
 use strict;
 use lib '.';
 use Test::More tests => 2;

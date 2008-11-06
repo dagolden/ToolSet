@@ -1,4 +1,3 @@
-#!perl -T
 use lib '.';
 use Test::More tests => 3;
 use t::Util; # gives us cant_ok()
