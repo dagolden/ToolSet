@@ -6,5 +6,7 @@ MSWin
 README
 STDERR
 STDOUT
+ToolSet
+toolset
 XS
 html

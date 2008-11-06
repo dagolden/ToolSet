@@ -52,13 +52,13 @@ sub import {
         else {
             croak "Invalid import specification for $mod";
         }
-        eval $evaltext;
+        eval $evaltext; ## no critic
         croak "$@" if $@;
     }
 
     # import from a @EXPORT array in the ToolSet subclass
     {
-        no strict 'refs';
+        no strict 'refs'; ## no critic
         for my $fcn ( @{"${class}::EXPORT"} ) {
             my $source = "${class}::${fcn}";
             die "Can't import missing subroutine $source"
