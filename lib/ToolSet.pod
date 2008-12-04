@@ -132,31 +132,15 @@ default settings and then disabling some of them.
 
 =head2 C<<< set_feature >>> (DEPRECATED)
 
-B<See C<<< use_pragma >>> instead>
-
-   ToolSet->set_feature( ":5.10" );
-   ToolSet->set_feature( qw/say switch/ );
-
-For Perl 5.10 or later, enables newer language features in modules the C<<< use() >>> 
-this one.
+See C<<< use_pragma >>> instead.
 
 =head2 C<<< set_strict >>> (DEPRECATED)
 
-B<See C<<< use_pragma >>> instead>
-
-   ToolSet->set_strict(1);
-   ToolSet->set_strict(0); # default
-
-Determines whether strict will enabled for modules that C<<< use() >>> this one.
+See C<<< use_pragma >>> instead.
 
 =head2 C<<< set_warnings >>> (DEPRECATED)
 
-B<See C<<< use_pragma >>> instead>
-
-   ToolSet->set_warnings(1);
-   ToolSet->set_warnings(0); # default
-
-Determines whether warnings will enabled for modules that C<<< use() >>> this one.
+See C<<< use_pragma >>> instead.
 
 =head1 DIAGNOSTICS
 

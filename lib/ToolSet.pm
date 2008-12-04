@@ -248,31 +248,15 @@ default settings and then disabling some of them.
 
 == {set_feature} (DEPRECATED)
 
-*See {use_pragma} instead*
-
-  ToolSet->set_feature( ":5.10" );
-  ToolSet->set_feature( qw/say switch/ );
-
-For Perl 5.10 or later, enables newer language features in modules the {use()} 
-this one.
+See {use_pragma} instead.
 
 == {set_strict} (DEPRECATED)
 
-*See {use_pragma} instead*
-
-  ToolSet->set_strict(1);
-  ToolSet->set_strict(0); # default
-
-Determines whether strict will enabled for modules that {use()} this one.
+See {use_pragma} instead.
 
 == {set_warnings} (DEPRECATED)
 
-*See {use_pragma} instead*
-
-  ToolSet->set_warnings(1);
-  ToolSet->set_warnings(0); # default
-
-Determines whether warnings will enabled for modules that {use()} this one.
+See {use_pragma} instead.
 
 = DIAGNOSTICS
 

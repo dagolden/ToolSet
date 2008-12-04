@@ -1,11 +1,11 @@
 Revision history for ToolSet
 
-0.99
+0.99 Thu Dec  4 09:17:40 EST 2008
 
     - Added: use_pragma() and no_pragma() for compile-time pragma support
     
     - Deprecated: set_strict(), set_warnings() and set_feature() are 
-      deprecated favor of use_pragma() and no_pragma()
+      deprecated favor of use_pragma()
       
     - Changed: switched to the Apache License, version 2.0; (it's clearer,
       relicensable, and is explicit about contributions)
