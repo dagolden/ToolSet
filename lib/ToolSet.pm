@@ -11,7 +11,8 @@ our $VERSION = '0.14';
 # package variables
 #--------------------------------------------------------------------------#
 
-my %pragmas;
+my %use_pragmas;
+my %no_pragmas;
 my %exports_of;
 
 #--------------------------------------------------------------------------#
@@ -28,13 +29,22 @@ sub export {
 sub import {
     my ($class) = @_;
     my $caller = caller;
-    if ( $pragmas{ $class } ) {
-      for my $p ( keys %{ $pragmas{$class} } ) {
+    if ( $use_pragmas{ $class } ) {
+      for my $p ( keys %{ $use_pragmas{$class} } ) {
         my $module = $p;
         $module =~ s{::}{/}g;
         $module .= ".pm";
         require $module;
-        $p->import( @{ $pragmas{ $class }{ $p } } );
+        $p->import( @{ $use_pragmas{ $class }{ $p } } );
+      }
+    }
+    if ( $no_pragmas{ $class } ) {
+      for my $p ( keys %{ $no_pragmas{$class} } ) {
+        my $module = $p;
+        $module =~ s{::}{/}g;
+        $module .= ".pm";
+        require $module;
+        $p->unimport( @{ $no_pragmas{ $class }{ $p } } );
       }
     }
     while ( my ( $mod, $request ) = each %{ $exports_of{ $class } } ) {
@@ -73,27 +83,33 @@ sub set_strict {
   my ($class, $value) = @_;
   return unless $value;
   my $caller = caller;
-  $pragmas{ $caller }{ strict } = [];
+  $use_pragmas{ $caller }{ strict } = [];
 }
 
 sub set_warnings {
   my ($class, $value) = @_;
   return unless $value;
   my $caller = caller;
-  $pragmas{ $caller }{ warnings } = [];
+  $use_pragmas{ $caller }{ warnings } = [];
 }
 
 sub set_feature {
   my ($class, @args) = @_;
   return unless @args;
   my $caller = caller;
-  $pragmas{ $caller }{ feature } = [ @args ];
+  $use_pragmas{ $caller }{ feature } = [ @args ];
 }
 
-sub set_pragma {
+sub use_pragma {
   my ($class, $pragma, @args) = @_;
   my $caller = caller;
-  $pragmas{ $caller }{ $pragma } = [ @args ];
+  $use_pragmas{ $caller }{ $pragma } = [ @args ];
+}
+
+sub no_pragma {
+  my ($class, $pragma, @args) = @_;
+  my $caller = caller;
+  $no_pragmas{ $caller }{ $pragma } = [ @args ];
 }
 
 
