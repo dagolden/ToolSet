@@ -11,9 +11,6 @@ our $VERSION = '0.14';
 # package variables
 #--------------------------------------------------------------------------#
 
-my %use_strict;
-my %use_warnings;
-my %use_feature;
 my %pragmas;
 my %exports_of;
 
@@ -31,18 +28,6 @@ sub export {
 sub import {
     my ($class) = @_;
     my $caller = caller;
-    if ( $use_strict{ $class } ) {
-        require strict; 
-        strict->import;
-    }
-    if ( $use_warnings{ $class } ) {
-        require warnings;
-        warnings->import;
-    }
-    if ( $use_feature{ $class } ) {
-        require feature;
-        feature->import( $use_feature{ $class } );
-    }
     if ( $pragmas{ $class } ) {
       for my $p ( keys %{ $pragmas{$class} } ) {
         my $module = $p;
@@ -85,21 +70,24 @@ sub import {
 }
 
 sub set_strict {
-    my ($class, $value) = @_;
-    my $caller = caller;
-    $use_strict{ $caller } = $value || 0;
+  my ($class, $value) = @_;
+  return unless $value;
+  my $caller = caller;
+  $pragmas{ $caller }{ strict } = [];
 }
 
 sub set_warnings {
-    my ($class, $value) = @_;
-    my $caller = caller;
-    $use_warnings{ $caller } = $value || 0;
+  my ($class, $value) = @_;
+  return unless $value;
+  my $caller = caller;
+  $pragmas{ $caller }{ warnings } = [];
 }
 
 sub set_feature {
-    my ($class, $value) = @_;
-    my $caller = caller;
-    $use_feature{ $caller } = $value || '';
+  my ($class, @args) = @_;
+  return unless @args;
+  my $caller = caller;
+  $pragmas{ $caller }{ feature } = [ @args ];
 }
 
 sub set_pragma {
