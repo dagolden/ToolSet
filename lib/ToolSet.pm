@@ -14,6 +14,7 @@ our $VERSION = '0.14';
 my %use_strict;
 my %use_warnings;
 my %use_feature;
+my %pragmas;
 my %exports_of;
 
 #--------------------------------------------------------------------------#
@@ -41,6 +42,15 @@ sub import {
     if ( $use_feature{ $class } ) {
         require feature;
         feature->import( $use_feature{ $class } );
+    }
+    if ( $pragmas{ $class } ) {
+      for my $p ( keys %{ $pragmas{$class} } ) {
+        my $module = $p;
+        $module =~ s{::}{/}g;
+        $module .= ".pm";
+        require $module;
+        $p->import( @{ $pragmas{ $class }{ $p } } );
+      }
     }
     while ( my ( $mod, $request ) = each %{ $exports_of{ $class } } ) {
         my $evaltext;
@@ -90,6 +100,12 @@ sub set_feature {
     my ($class, $value) = @_;
     my $caller = caller;
     $use_feature{ $caller } = $value || '';
+}
+
+sub set_pragma {
+  my ($class, $pragma, @args) = @_;
+  my $caller = caller;
+  $pragmas{ $caller }{ $pragma } = [ @args ];
 }
 
 
