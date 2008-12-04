@@ -5,9 +5,8 @@ our $VERSION = '0.14';
 
 use base 'ToolSet';
 
-ToolSet->set_strict(1);
-
-ToolSet->set_warnings(1);
+ToolSet->use_pragma( 'strict' );
+ToolSet->use_pragma( 'warnings' );
 
 ToolSet->export(
     'Carp' => undef,
@@ -44,50 +43,40 @@ ToolSet:SWC is a simple example of a ToolSet that enables strict and warnings
 and also imports all the basic [Carp] functions. See [ToolSet] for more
 details.
 
-= BUGS AND LIMITATIONS
+= SEE ALSO
 
-No bugs have been reported.
+* [ToolSet]
 
-Please report any bugs or feature requests at
-{bug-toolset@rt.cpan.org}, or through the web interface at
-[http://rt.cpan.org].
+= BUGS
+
+Please report any bugs or feature using the CPAN Request Tracker.  
+Bugs can be submitted through the web interface at 
+[http://rt.cpan.org/Dist/Display.html?Queue=ToolSet]
 
 When submitting a bug or request, please include a test-file or a patch to an
 existing test-file that illustrates the bug or desired feature.
 
 = AUTHOR
 
-David A Golden  {<dagolden@cpan.org>}
+David A. Golden (DAGOLDEN)
 
-= LICENCE AND COPYRIGHT
+= COPYRIGHT AND LICENSE
 
-Copyright (c) 2005, David A Golden {<dagolden@cpan.org>}. All rights reserved.
+Copyright (c) 2005-2008 by David A. Golden. All rights reserved.
 
-This module is free software; you can redistribute it and/or modify it under
-the same terms as Perl itself. See the {LICENSE} file included with this
-module.
+Licensed under Apache License, Version 2.0 (the "License").
+You may not use this file except in compliance with the License.
+A copy of the License was distributed with this file or you may obtain a 
+copy of the License from http://www.apache.org/licenses/LICENSE-2.0
 
-= DISCLAIMER OF WARRANTY
+Files produced as output though the use of this software, shall not be
+considered Derivative Works, but shall be considered the original work of the
+Licensor.
 
-BECAUSE THIS SOFTWARE IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY
-FOR THE SOFTWARE, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN
-OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS AND/OR OTHER PARTIES
-PROVIDE THE SOFTWARE "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
-EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE
-ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE SOFTWARE IS WITH
-YOU. SHOULD THE SOFTWARE PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL
-NECESSARY SERVICING, REPAIR, OR CORRECTION.
-
-IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING
-WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY AND/OR
-REDISTRIBUTE THE SOFTWARE AS PERMITTED BY THE ABOVE LICENCE, BE
-LIABLE TO YOU FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL,
-OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE
-THE SOFTWARE (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING
-RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A
-FAILURE OF THE SOFTWARE TO OPERATE WITH ANY OTHER SOFTWARE), EVEN IF
-SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF
-SUCH DAMAGES.
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
 =end wikidoc

@@ -19,9 +19,9 @@ Creating a ToolSet:
  
      use base 'ToolSet'; 
  
-     ToolSet->set_strict(1);
-     ToolSet->set_warnings(1);
-     ToolSet->set_feature( qw/say switch/ ); # perl 5.10
+     ToolSet->use_pragma( 'strict' );
+     ToolSet->use_pragma( 'warnings' );
+     ToolSet->use_pragma( qw/feature say switch/ ); # perl 5.10
  
      # define exports from other modules
      ToolSet->export(
@@ -33,7 +33,7 @@ Creating a ToolSet:
      our @EXPORT = qw( shout );
      sub shout { print uc shift };
  
-     1; # modules must be true
+     1; # modules must return true
 
 Using a ToolSet:
 
@@ -58,8 +58,8 @@ specifies modules to be imported together into other code.
 
 ToolSet is designed to be a superclass -- subclasses will specify specific
 modules to bundle.  ToolSet supports custom import lists for each included
-module and even supports the C<<< strict >>> and C<<< warnings >>> pragmas, optionally
-enabling those pragmas when the ToolSet subclass is used.
+module and even supports compile-time pragmas like C<<< strict >>>, C<<< warnings >>>
+and C<<< feature >>>. 
 
 A ToolSet module does not physically bundle the component modules, but rather
 specifies lists of modules to be used together and import specifications for
@@ -81,7 +81,7 @@ ToolSet must be used as a base class.
      our @EXPORT = qw( shout };
      sub shout { print uc shift }
 
-Functions defined in the ToolSet subclass can be exported by default during
+Functions defined in the ToolSet subclass can be automatically exported during
 C<<< use() >>> by listing them in an C<<< @EXPORT >>> array.
 
 =head2 C<<< export >>>
@@ -107,7 +107,32 @@ provided to C<<< use() >>>:
 Elements in an array are passed to C<<< use() >>> as a white-space separated list, so
 elements may not themselves contain spaces or unexpected results will occur.
 
-=head2 C<<< set_feature >>>
+=head2 C<<< use_pragma >>>
+
+   ToolSet->use_pragma( 'strict' );         # use strict;
+   ToolSet->use_pragma( 'feature', ':5.10' ); # use feature ':5.10';
+
+Specifies a compile-time pragma to enable and optional arguments to that
+pragma.  This must only be used with pragmas that act via the magic C<<< $^H >>> or
+C<<< %^H >>> variables.  It must not be used with modules that have other side-effects
+during import() such as exporting functions.
+
+=head2 C<<< no_pragma >>>
+
+   ToolSet->no_pragma( 'indirect' ); # no indirect;
+
+Like C<<< use_pragma >>>, but disables a pragma instead.
+
+If a pragma is specified in both a C<<< use_pragma >>> and C<<< no_pragma >>> statement, the
+C<<< use_pragma >>> will be executed first.  This allow turning on a pragma with 
+default settings and then disabling some of them.
+
+   ToolSet->use_pragma( 'strict' );
+   ToolSet->no_pragma ( 'strict', 'refs' ); 
+
+=head2 C<<< set_feature >>> (DEPRECATED)
+
+B<See C<<< use_pragma >>> instead>
 
    ToolSet->set_feature( ":5.10" );
    ToolSet->set_feature( qw/say switch/ );
@@ -115,14 +140,18 @@ elements may not themselves contain spaces or unexpected results will occur.
 For Perl 5.10 or later, enables newer language features in modules the C<<< use() >>> 
 this one.
 
-=head2 C<<< set_strict >>>
+=head2 C<<< set_strict >>> (DEPRECATED)
+
+B<See C<<< use_pragma >>> instead>
 
    ToolSet->set_strict(1);
    ToolSet->set_strict(0); # default
 
 Determines whether strict will enabled for modules that C<<< use() >>> this one.
 
-=head2 C<<< set_warnings >>>
+=head2 C<<< set_warnings >>> (DEPRECATED)
+
+B<See C<<< use_pragma >>> instead>
 
    ToolSet->set_warnings(1);
    ToolSet->set_warnings(0); # default
@@ -163,13 +192,6 @@ ToolSet requires no configuration files or environment variables.
 ToolSet requires at least Perl 5.6.  ToolSet subclasses will, of course, be
 dependent on any modules they load.
 
-=head1 INCOMPATIBILITIES
-
-The only pragmas that are explicitly supported are C<<< strict >>> and C<<< warnings >>>, as
-these have a lexical scope and will not function properly if called from within
-the C<<< eval >>> statement used for importing other modules.  Other pragmas may or
-may not work depending on if they have a compile-time or run-time effect.
-
 =head1 SEE ALSO
 
 Similar functionality is provided by the L<Toolkit> module, though that 
@@ -177,49 +199,35 @@ module requires defining the bundle via text files found within directories
 in C<<< PERL5LIB >>> and uses source filtering to insert their contents as files
 are compiled.
 
-=head1 BUGS AND LIMITATIONS
+=head1 BUGS
 
-No bugs have been reported.
-
-Please report any bugs or feature requests at
-C<<< bug-toolset@rt.cpan.org >>>, or through the web interface at
-L<http://rt.cpan.org>.
+Please report any bugs or feature using the CPAN Request Tracker.  
+Bugs can be submitted through the web interface at 
+L<http://rt.cpan.org/Dist/Display.html?Queue=ToolSet>
 
 When submitting a bug or request, please include a test-file or a patch to an
 existing test-file that illustrates the bug or desired feature.
 
 =head1 AUTHOR
 
-David A Golden  C<<< <dagolden@cpan.org> >>>
+David A. Golden (DAGOLDEN)
 
-=head1 LICENCE AND COPYRIGHT
+=head1 COPYRIGHT AND LICENSE
 
-Copyright (c) 2005, David A Golden C<<< <dagolden@cpan.org> >>>. All rights reserved.
+Copyright (c) 2005-2008 by David A. Golden. All rights reserved.
 
-This module is free software; you can redistribute it andE<sol>or modify it under
-the same terms as Perl itself. See the C<<< LICENSE >>> file included with this
-module.
+Licensed under Apache License, Version 2.0 (the "License").
+You may not use this file except in compliance with the License.
+A copy of the License was distributed with this file or you may obtain a 
+copy of the License from http:E<sol>E<sol>www.apache.orgE<sol>licensesE<sol>LICENSE-2.0
 
-=head1 DISCLAIMER OF WARRANTY
+Files produced as output though the use of this software, shall not be
+considered Derivative Works, but shall be considered the original work of the
+Licensor.
 
-BECAUSE THIS SOFTWARE IS LICENSED FREE OF CHARGE, THERE IS NO WARRANTY
-FOR THE SOFTWARE, TO THE EXTENT PERMITTED BY APPLICABLE LAW. EXCEPT WHEN
-OTHERWISE STATED IN WRITING THE COPYRIGHT HOLDERS ANDE<sol>OR OTHER PARTIES
-PROVIDE THE SOFTWARE "AS IS" WITHOUT WARRANTY OF ANY KIND, EITHER
-EXPRESSED OR IMPLIED, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE. THE
-ENTIRE RISK AS TO THE QUALITY AND PERFORMANCE OF THE SOFTWARE IS WITH
-YOU. SHOULD THE SOFTWARE PROVE DEFECTIVE, YOU ASSUME THE COST OF ALL
-NECESSARY SERVICING, REPAIR, OR CORRECTION.
-
-IN NO EVENT UNLESS REQUIRED BY APPLICABLE LAW OR AGREED TO IN WRITING
-WILL ANY COPYRIGHT HOLDER, OR ANY OTHER PARTY WHO MAY MODIFY ANDE<sol>OR
-REDISTRIBUTE THE SOFTWARE AS PERMITTED BY THE ABOVE LICENCE, BE
-LIABLE TO YOU FOR DAMAGES, INCLUDING ANY GENERAL, SPECIAL, INCIDENTAL,
-OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR INABILITY TO USE
-THE SOFTWARE (INCLUDING BUT NOT LIMITED TO LOSS OF DATA OR DATA BEING
-RENDERED INACCURATE OR LOSSES SUSTAINED BY YOU OR THIRD PARTIES OR A
-FAILURE OF THE SOFTWARE TO OPERATE WITH ANY OTHER SOFTWARE), EVEN IF
-SUCH HOLDER OR OTHER PARTY HAS BEEN ADVISED OF THE POSSIBILITY OF
-SUCH DAMAGES.
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
 
