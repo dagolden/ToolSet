@@ -8,7 +8,7 @@ ToolSet - Load your commonly-used modules in a single import
 
 =head1 VERSION
 
-This documentation describes version 0.14.
+This documentation describes version 0.99.
 
 =head1 SYNOPSIS
 

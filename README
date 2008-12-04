@@ -2,7 +2,7 @@ NAME
     ToolSet - Load your commonly-used modules in a single import
 
 VERSION
-    This documentation describes version 0.14.
+    This documentation describes version 0.99.
 
 SYNOPSIS
     Creating a ToolSet:

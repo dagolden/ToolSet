@@ -8,7 +8,7 @@ ToolSet::SWC - Sample toolset with strict, warnings and Carp
 
 =head1 VERSION
 
-This documentation describes version 0.14.
+This documentation describes version 0.99.
 
 =head1 SYNOPSIS
 

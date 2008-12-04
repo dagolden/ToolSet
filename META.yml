@@ -1,6 +1,6 @@
 ---
 name: ToolSet
-version: 0.14
+version: 0.99
 author:
   - 'David Golden <dagolden@cpan.org>'
 abstract: Load your commonly-used modules in a single import
@@ -17,10 +17,10 @@ build_requires:
 provides:
   ToolSet:
     file: lib/ToolSet.pm
-    version: 0.14
+    version: 0.99
   ToolSet::SWC:
     file: lib/ToolSet/SWC.pm
-    version: 0.14
+    version: 0.99
 generated_by: Module::Build version 0.3
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.2.html

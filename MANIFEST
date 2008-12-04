@@ -19,7 +19,9 @@ t/03-warnings.t
 t/04-export.t
 t/05-self-export.t
 t/06-feature.t
+t/07-pragmas.t
 t/50-SWC.t
+t/lib/bogopragma.pm
 t/Sample/HasFeature.pm
 t/Sample/HasWarnings.pm
 t/Sample/IgnoreWarnings.pm
@@ -31,7 +33,9 @@ t/ToolSet/Export.pm
 t/ToolSet/ExportBadType.pm
 t/ToolSet/ExportFails.pm
 t/ToolSet/ExportFails2.pm
+t/ToolSet/NoPragmas.pm
 t/ToolSet/Null.pm
+t/ToolSet/Pragmas.pm
 t/ToolSet/SelfExport.pm
 t/ToolSet/SelfExportFails.pm
 t/ToolSet/StrictWarn.pm

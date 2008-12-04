@@ -1,5 +1,7 @@
 Revision history for ToolSet
 
+0.99
+
     - Added: use_pragma() and no_pragma() for compile-time pragma support
     
     - Deprecated: set_strict(), set_warnings() and set_feature() are 
