@@ -1,5 +1,5 @@
 use lib '.';
-use Test::More tests => 20;
+use Test::More tests => 21;
 use t::Util; # gives us cant_ok()
 
 BEGIN { use_ok( "t::ToolSet::Export" ) }
@@ -36,10 +36,17 @@ eval " use t::ToolSet::ExportFails ";
 like( "$@", qr{Can't locate Bogus/Module.pm in \@INC},
     "Missing module throws error (no args)"
 );
+
 # Ditto but with an argument to module
 eval " use t::ToolSet::ExportFails2 ";
 like( "$@", qr{Can't locate Bogus/Module.pm in \@INC},
     "Missing module throws error (arg style)"
+);
+
+# Ditto but with odd number of arguments
+eval " use t::ToolSet::ExportFails3 ";
+like( "$@", qr{Arguments to export\(\) must be key/value pairs},
+    "Odd number of arguments throws error"
 );
 
 # Test error handling for bad value type

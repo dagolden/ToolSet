@@ -9,6 +9,8 @@ ToolSet->export(
     'File::Spec::Functions' => 'devnull catdir',
     'Cwd' => [qw( cwd fastcwd )],
     'File::Path' => '!mkpath',
+    'autouse' => [ 'File::Copy' => 'copy' ],
+    'autouse' => [ 'File::Find' => 'find' ],
 );
 
 1; # return true

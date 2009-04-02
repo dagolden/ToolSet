@@ -5,7 +5,7 @@ use strict;
 use warnings;
 use Carp;
 
-our $VERSION = '0.99';
+our $VERSION = '1.00';
 
 #--------------------------------------------------------------------------#
 # package variables
@@ -21,9 +21,11 @@ my %exports_of;
 
 sub export {
     my $class = shift;
-    my %spec = @_;
+    croak "Arguments to export() must be key/value pairs"
+      if @_ % 2;
+    my @spec = @_;
     my $caller = caller;
-    $exports_of{ $caller } = \%spec;
+    $exports_of{ $caller } = \@spec;
 }
 
 sub import {
@@ -47,7 +49,10 @@ sub import {
         $p->unimport( @{ $no_pragmas{ $class }{ $p } } );
       }
     }
-    while ( my ( $mod, $request ) = each %{ $exports_of{ $class } } ) {
+    my @exports = @{ $exports_of{ $class } || [] };
+    while (@exports){
+        my ($mod, $request) = splice( @exports, 0, 2 );
+
         my $evaltext;
         if ( ! $request ) {
             $evaltext = "package $caller; use $mod";
@@ -76,7 +81,6 @@ sub import {
             *{"${caller}::${fcn}"} = \&{$source};
         }
     }
-                
 }
 
 sub set_strict {
@@ -222,6 +226,14 @@ provided to {use()}:
     
 Elements in an array are passed to {use()} as a white-space separated list, so
 elements may not themselves contain spaces or unexpected results will occur.
+
+As of version 1.00, modules may be repeated multiple times.  This is useful
+with modules like [autouse].
+
+    ToolSet->export(
+      autouse => [ 'Carp' => qw(carp croak) ],
+      autouse => [ 'Scalar::Util' => qw(refaddr blessed) ],
+    );
 
 == {use_pragma}
 

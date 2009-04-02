@@ -1,12 +1,12 @@
 ---
 name: ToolSet
-version: 0.99
+version: 1.00
 author:
   - 'David Golden <dagolden@cpan.org>'
 abstract: Load your commonly-used modules in a single import
 license: apache
 resources:
-  license: http://apache.org/licenses/LICENSE-2.0
+  license: http://www.apache.org/licenses/LICENSE-2.0.txt
 requires:
   Carp: 0
   base: 0
@@ -17,11 +17,11 @@ build_requires:
 provides:
   ToolSet:
     file: lib/ToolSet.pm
-    version: 0.99
+    version: 1.00
   ToolSet::SWC:
     file: lib/ToolSet/SWC.pm
-    version: 0.99
-generated_by: Module::Build version 0.3
+    version: 1.00
+generated_by: Module::Build version 0.32
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.2.html
   version: 1.2

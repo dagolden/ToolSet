@@ -8,7 +8,7 @@ ToolSet - Load your commonly-used modules in a single import
 
 =head1 VERSION
 
-This documentation describes version 0.99.
+This documentation describes version 1.00.
 
 =head1 SYNOPSIS
 
@@ -106,6 +106,14 @@ provided to C<<< use() >>>:
 
 Elements in an array are passed to C<<< use() >>> as a white-space separated list, so
 elements may not themselves contain spaces or unexpected results will occur.
+
+As of version 1.00, modules may be repeated multiple times.  This is useful
+with modules like L<autouse>.
+
+     ToolSet->export(
+       autouse => [ 'Carp' => qw(carp croak) ],
+       autouse => [ 'Scalar::Util' => qw(refaddr blessed) ],
+     );
 
 =head2 C<<< use_pragma >>>
 

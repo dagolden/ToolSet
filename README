@@ -2,7 +2,7 @@ NAME
     ToolSet - Load your commonly-used modules in a single import
 
 VERSION
-    This documentation describes version 0.99.
+    This documentation describes version 1.00.
 
 SYNOPSIS
     Creating a ToolSet:
@@ -96,6 +96,14 @@ INTERFACE
     Elements in an array are passed to "use()" as a white-space separated
     list, so elements may not themselves contain spaces or unexpected
     results will occur.
+
+    As of version 1.00, modules may be repeated multiple times. This is
+    useful with modules like autouse.
+
+         ToolSet->export(
+           autouse => [ 'Carp' => qw(carp croak) ],
+           autouse => [ 'Scalar::Util' => qw(refaddr blessed) ],
+         );
 
   "use_pragma"
        ToolSet->use_pragma( 'strict' );         # use strict;
