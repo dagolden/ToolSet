@@ -34,6 +34,7 @@ t/ToolSet/Export.pm
 t/ToolSet/ExportBadType.pm
 t/ToolSet/ExportFails.pm
 t/ToolSet/ExportFails2.pm
+t/ToolSet/ExportFails3.pm
 t/ToolSet/NoPragmas.pm
 t/ToolSet/NoStrictRefs.pm
 t/ToolSet/Null.pm
