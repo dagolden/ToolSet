@@ -1,5 +1,13 @@
 Revision history for ToolSet
 
+{{$NEXT}}
+
+    [CHANGED]
+
+    - Updated metadata, repo and bugtracker
+
+    - Switched to managing distribution with Dist::Zilla
+
 1.00 Thu Apr  2 07:05:19 EDT 2009
 
     - Changed: modules can be repeated in the list to export() to support
