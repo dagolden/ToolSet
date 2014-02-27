@@ -17,8 +17,8 @@ local $SIG{__WARN__} = sub {
 
 # return and clear
 sub check_warning {
-    my $val = $warning; 
-    $warning = '';      
+    my $val = $warning;
+    $warning = '';
     return $val;
 }
 
@@ -28,13 +28,13 @@ sub check_warning {
 
 # Catch warning
 require t::Sample::HasWarnings;
-like( check_warning(), qr/^Argument "" isn't numeric in addition/,
-    "Warnings propogate when set_warnings(1)" 
+like(
+    check_warning(),
+    qr/^Argument "" isn't numeric in addition/,
+    "Warnings propogate when set_warnings(1)"
 );
 
 # Ignore warning
 require t::Sample::IgnoreWarnings;
-is( check_warning(), q{},
-    "Warnings don't propogate when set_warnings(0)" 
-);
+is( check_warning(), q{}, "Warnings don't propogate when set_warnings(0)" );
 

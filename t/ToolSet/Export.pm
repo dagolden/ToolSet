@@ -2,15 +2,15 @@ package t::ToolSet::Export;
 use base 'ToolSet';
 
 ToolSet->export(
-    'Carp' => undef,
-    'Getopt::Std' => '',
-    'Text::Wrap' => [],
-    'File::Basename' => 'basename',
+    'Carp'                  => undef,
+    'Getopt::Std'           => '',
+    'Text::Wrap'            => [],
+    'File::Basename'        => 'basename',
     'File::Spec::Functions' => 'devnull catdir',
-    'Cwd' => [qw( cwd fastcwd )],
-    'File::Path' => '!mkpath',
-    'autouse' => [ 'File::Copy' => 'copy' ],
-    'autouse' => [ 'File::Find' => 'find' ],
+    'Cwd'                   => [qw( cwd fastcwd )],
+    'File::Path'            => '!mkpath',
+    'autouse'               => [ 'File::Copy' => 'copy' ],
+    'autouse'               => [ 'File::Find' => 'find' ],
 );
 
 1; # return true

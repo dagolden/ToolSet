@@ -17,8 +17,8 @@ local $SIG{__WARN__} = sub {
 
 # return and clear
 sub check_warning {
-    my $val = $warning; 
-    $warning = '';      
+    my $val = $warning;
+    $warning = '';
     return $val;
 }
 
@@ -28,14 +28,13 @@ sub check_warning {
 
 # Catch warning
 require t::Sample::SWC;
-like( check_warning(), qr/^We can carp/,
-    "ToolSet::SWC carping works" 
-);
+like( check_warning(), qr/^We can carp/, "ToolSet::SWC carping works" );
 
 eval "use t::Sample::SWCError; ";
 
-like( "$@", qr/^Global symbol "\$var" requires explicit package name/, 
+like(
+    "$@",
+    qr/^Global symbol "\$var" requires explicit package name/,
     "ToolSet::SWC sets strict"
 );
-
 

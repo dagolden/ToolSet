@@ -7,12 +7,10 @@ package ToolSet::SWC;
 
 use base 'ToolSet';
 
-ToolSet->use_pragma( 'strict' );
-ToolSet->use_pragma( 'warnings' );
+ToolSet->use_pragma('strict');
+ToolSet->use_pragma('warnings');
 
-ToolSet->export(
-    'Carp' => undef,
-);
+ToolSet->export( 'Carp' => undef, );
 
 1; # true
 __END__

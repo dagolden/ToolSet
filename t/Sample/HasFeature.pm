@@ -6,8 +6,8 @@ my $foo;
 my $bar;
 
 given ($foo) {
-  when (1)  { $bar = "hello world" }
-  default   { $bar = "goodbye world" }
+    when (1) { $bar = "hello world" }
+    default  { $bar = "goodbye world" }
 }
 
 1; # return true

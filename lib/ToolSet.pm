@@ -24,43 +24,43 @@ sub export {
     my $class = shift;
     croak "Arguments to export() must be key/value pairs"
       if @_ % 2;
-    my @spec = @_;
+    my @spec   = @_;
     my $caller = caller;
-    $exports_of{ $caller } = \@spec;
+    $exports_of{$caller} = \@spec;
 }
 
 sub import {
     my ($class) = @_;
     my $caller = caller;
-    if ( $use_pragmas{ $class } ) {
-      for my $p ( keys %{ $use_pragmas{$class} } ) {
-        my $module = $p;
-        $module =~ s{::}{/}g;
-        $module .= ".pm";
-        require $module;
-        $p->import( @{ $use_pragmas{ $class }{ $p } } );
-      }
+    if ( $use_pragmas{$class} ) {
+        for my $p ( keys %{ $use_pragmas{$class} } ) {
+            my $module = $p;
+            $module =~ s{::}{/}g;
+            $module .= ".pm";
+            require $module;
+            $p->import( @{ $use_pragmas{$class}{$p} } );
+        }
     }
-    if ( $no_pragmas{ $class } ) {
-      for my $p ( keys %{ $no_pragmas{$class} } ) {
-        my $module = $p;
-        $module =~ s{::}{/}g;
-        $module .= ".pm";
-        require $module;
-        $p->unimport( @{ $no_pragmas{ $class }{ $p } } );
-      }
+    if ( $no_pragmas{$class} ) {
+        for my $p ( keys %{ $no_pragmas{$class} } ) {
+            my $module = $p;
+            $module =~ s{::}{/}g;
+            $module .= ".pm";
+            require $module;
+            $p->unimport( @{ $no_pragmas{$class}{$p} } );
+        }
     }
-    my @exports = @{ $exports_of{ $class } || [] };
-    while (@exports){
-        my ($mod, $request) = splice( @exports, 0, 2 );
+    my @exports = @{ $exports_of{$class} || [] };
+    while (@exports) {
+        my ( $mod, $request ) = splice( @exports, 0, 2 );
 
         my $evaltext;
-        if ( ! $request ) {
+        if ( !$request ) {
             $evaltext = "package $caller; use $mod";
         }
         elsif ( ref $request eq 'ARRAY' ) {
             my $args = join( q{ } => @$request );
-            $evaltext =  "package $caller; use $mod qw( $args )";
+            $evaltext = "package $caller; use $mod qw( $args )";
         }
         elsif ( ref( \$request ) eq 'SCALAR' ) {
             $evaltext = "package $caller; use $mod qw( $request )";
@@ -78,45 +78,44 @@ sub import {
         for my $fcn ( @{"${class}::EXPORT"} ) {
             my $source = "${class}::${fcn}";
             die "Can't import missing subroutine $source"
-                if ! defined *{$source}{CODE};
+              if !defined *{$source}{CODE};
             *{"${caller}::${fcn}"} = \&{$source};
         }
     }
 }
 
 sub set_strict {
-  my ($class, $value) = @_;
-  return unless $value;
-  my $caller = caller;
-  $use_pragmas{ $caller }{ strict } = [];
+    my ( $class, $value ) = @_;
+    return unless $value;
+    my $caller = caller;
+    $use_pragmas{$caller}{strict} = [];
 }
 
 sub set_warnings {
-  my ($class, $value) = @_;
-  return unless $value;
-  my $caller = caller;
-  $use_pragmas{ $caller }{ warnings } = [];
+    my ( $class, $value ) = @_;
+    return unless $value;
+    my $caller = caller;
+    $use_pragmas{$caller}{warnings} = [];
 }
 
 sub set_feature {
-  my ($class, @args) = @_;
-  return unless @args;
-  my $caller = caller;
-  $use_pragmas{ $caller }{ feature } = [ @args ];
+    my ( $class, @args ) = @_;
+    return unless @args;
+    my $caller = caller;
+    $use_pragmas{$caller}{feature} = [@args];
 }
 
 sub use_pragma {
-  my ($class, $pragma, @args) = @_;
-  my $caller = caller;
-  $use_pragmas{ $caller }{ $pragma } = [ @args ];
+    my ( $class, $pragma, @args ) = @_;
+    my $caller = caller;
+    $use_pragmas{$caller}{$pragma} = [@args];
 }
 
 sub no_pragma {
-  my ($class, $pragma, @args) = @_;
-  my $caller = caller;
-  $no_pragmas{ $caller }{ $pragma } = [ @args ];
+    my ( $class, $pragma, @args ) = @_;
+    my $caller = caller;
+    $no_pragmas{$caller}{$pragma} = [@args];
 }
-
 
 1; # Magic true value required at end of module
 __END__
