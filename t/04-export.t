@@ -1,5 +1,5 @@
 use lib '.';
-use Test::More tests => 21;
+use Test::More tests => 22;
 use t::Util; # gives us cant_ok()
 
 BEGIN { use_ok("t::ToolSet::Export") }
@@ -30,6 +30,9 @@ cant_ok( "main", $_ ) for qw( getcwd fastgetcwd );
 # 'File::Path' => [ '!mkpath' ]
 can_ok( "main", "rmtree" );
 cant_ok( "main", "mkpath" );
+
+like( join( ',', @t::Sample::StoreArguments::use_arguments ),
+    qr/\Qa,String with spaces\E/ );
 
 # Test error handling if module not found
 eval " use t::ToolSet::ExportFails ";
