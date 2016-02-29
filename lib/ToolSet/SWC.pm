@@ -16,9 +16,7 @@ ToolSet->export( 'Carp' => undef, );
 1; # true
 __END__
 
-=begin wikidoc
-
-= SYNOPSIS
+=head1 SYNOPSIS
 
     use ToolSet::SWC;
     
@@ -30,14 +28,15 @@ __END__
     
     $name = "Igor";     # this will fail strict when compiling
   
-= DESCRIPTION
+=head1 DESCRIPTION
 
 ToolSet:SWC is a simple example of a ToolSet that enables strict and warnings
-and also imports all the basic [Carp] functions. See [ToolSet] for more
+and also imports all the basic L<Carp> functions. See L<ToolSet> for more
 details.
 
-= SEE ALSO
+=head1 SEE ALSO
 
-* [ToolSet]
+=for :list
+* L<ToolSet>
 
-=end wikidoc
+=cut

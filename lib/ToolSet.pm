@@ -121,17 +121,15 @@ sub no_pragma {
 1; # Magic true value required at end of module
 __END__
 
-=begin wikidoc
-
-= SYNOPSIS
+=head1 SYNOPSIS
 
 Creating a ToolSet:
 
     # My/Tools.pm
     package My::Tools;
 
-    use base 'ToolSet'; 
-    
+    use base 'ToolSet';
+
     ToolSet->use_pragma( 'strict' );
     ToolSet->use_pragma( 'warnings' );
     ToolSet->use_pragma( qw/feature say switch/ ); # perl 5.10
@@ -145,151 +143,152 @@ Creating a ToolSet:
     # define exports from this module
     our @EXPORT = qw( shout );
     sub shout { print uc shift };
-    
+
     1; # modules must return true
 
 Using a ToolSet:
 
     # my_script.pl
-    
+
     use My::Tools;
-    
+
     # strict is on
     # warnings are on
     # Carp and refaddr are imported
-    
+
     carp "We can carp!";
     print refaddr [];
     shout "We can shout, too!";
-  
-= DESCRIPTION
+
+=head1 DESCRIPTION
 
 ToolSet provides a mechanism for creating logical bundles of modules that can
 be treated as a single, reusable toolset that is imported as one.  Unlike
 CPAN bundles, which specify modules to be installed together, a toolset
-specifies modules to be imported together into other code.  
+specifies modules to be imported together into other code.
 
-ToolSet is designed to be a superclass -- subclasses will specify specific
+Toolset is designed to be a superclass -- subclasses will specify specific
 modules to bundle.  ToolSet supports custom import lists for each included
-module and even supports compile-time pragmas like {strict}, {warnings}
-and {feature}. 
+module and even supports compile-time pragmas like C<strict>, C<warnings>
+and C<feature>.
 
-A ToolSet module does not physically bundle the component modules, but rather
-specifies lists of modules to be used together and import specifications for
-each.  By adding the component modules to a prerequisites list in a
-{Makefile.PL} or {Build.PL} for a ToolSet subclass, an entire dependency chain
-can be managed as a single unit across scripts or distributions that use the
-subclass.
+A ToolSet module does not physically bundle the component modules, but
+rather specifies lists of modules to be used together and import
+specifications for each.  By adding the component modules to a
+prerequisites list in a C<Makefile.PL> or C<Build.PL> for a ToolSet
+subclass, an entire dependency chain can be managed as a single unit across
+scripts or distributions that use the subclass.
 
-= INTERFACE 
+=head1 INTERFACE
 
-== Setting up
+=head2 Setting up
 
     use base 'ToolSet';
-    
+
 ToolSet must be used as a base class.
 
-== {@EXPORT}
+=head2 C<@EXPORT>
 
     our @EXPORT = qw( shout };
     sub shout { print uc shift }
 
 Functions defined in the ToolSet subclass can be automatically exported during
-{use()} by listing them in an {@EXPORT} array.
+C<use()> by listing them in an C<@EXPORT> array.
 
-== {export}
+=head2 C<export>
 
     ToolSet->export(
-        'Carp' => undef,                    
+        'Carp' => undef,
         'Scalar::Util' => 'refaddr',
     );
 
-Specifies packages and arguments to import via {use()}.  An argument of {undef}
-or the empty string calls {use()} with default imports.  Arguments should be
+Specifies packages and arguments to import via C<use()>.  An argument of C<undef>
+or the empty string calls C<use()> with default imports.  Arguments should be
 provided either as a whitespace delimited string or in an anonymous array.  An
 empty anonymous array will be treated like passing the empty list as an
-argument to {use()}.  Here are examples of how how specifications will be
-provided to {use()}:
+argument to C<use()>.  Here are examples of how how specifications will be
+provided to C<use()>:
 
-    'Carp' => undef                 # use Carp; 
+    'Carp' => undef                 # use Carp;
     'Carp' => q{}                   # use Carp;
     'Carp' => 'carp croak'          # use Carp qw( carp croak );
     'Carp' => [ '!carp', 'croak' ]  # use Carp qw( !carp croak );
-    'Carp' => []                    # use Carp (); 
-    
-Elements in an array are passed to {use()} as a white-space separated list, so
-elements may not themselves contain spaces or unexpected results will occur.
+    'Carp' => []                    # use Carp ();
+
+Elements in an array are passed to C<use()> as a white-space separated
+list, so elements may not themselves contain spaces or unexpected results
+will occur.
 
 As of version 1.00, modules may be repeated multiple times.  This is useful
-with modules like [autouse].
+with modules like L<autouse>.
 
     ToolSet->export(
       autouse => [ 'Carp' => qw(carp croak) ],
       autouse => [ 'Scalar::Util' => qw(refaddr blessed) ],
     );
 
-== {use_pragma}
+=head2 C<use_pragma>
 
   ToolSet->use_pragma( 'strict' );         # use strict;
   ToolSet->use_pragma( 'feature', ':5.10' ); # use feature ':5.10';
 
 Specifies a compile-time pragma to enable and optional arguments to that
-pragma.  This must only be used with pragmas that act via the magic {$^H} or
-{%^H} variables.  It must not be used with modules that have other side-effects
+pragma.  This must only be used with pragmas that act via the magic C<$^H> or
+C<%^H> variables.  It must not be used with modules that have other side-effects
 during import() such as exporting functions.
 
-== {no_pragma}
+=head2 C<no_pragma>
 
   ToolSet->no_pragma( 'indirect' ); # no indirect;
 
-Like {use_pragma}, but disables a pragma instead.
+Like C<use_pragma>, but disables a pragma instead.
 
-If a pragma is specified in both a {use_pragma} and {no_pragma} statement, the
-{use_pragma} will be executed first.  This allow turning on a pragma with 
+If a pragma is specified in both a C<use_pragma> and C<no_pragma> statement, the
+C<use_pragma> will be executed first.  This allow turning on a pragma with
 default settings and then disabling some of them.
 
   ToolSet->use_pragma( 'strict' );
-  ToolSet->no_pragma ( 'strict', 'refs' ); 
+  ToolSet->no_pragma ( 'strict', 'refs' );
 
-== {set_feature} (DEPRECATED)
+=head2 C<set_feature> (DEPRECATED)
 
-See {use_pragma} instead.
+See C<use_pragma> instead.
 
-== {set_strict} (DEPRECATED)
+=head2 C<set_strict> (DEPRECATED)
 
-See {use_pragma} instead.
+See C<use_pragma> instead.
 
-== {set_warnings} (DEPRECATED)
+=head2 C<set_warnings> (DEPRECATED)
 
-See {use_pragma} instead.
+See C<use_pragma> instead.
 
-= DIAGNOSTICS
+=head1 DIAGNOSTICS
 
 ToolSet will report an error for a module that cannot be found just like an
-ordinary call to {use()} or {require()}.
+ordinary call to C<use()> or C<require()>.
 
 Additional error messages include:
 
-* {"Invalid import specification for MODULE"} -- an incorrect type was
-provided for the list to be imported (e.g. a hash reference)
+=for :list
+* C<"Invalid import specification for MODULE"> -- an incorrect type was
+  provided for the list to be imported (e.g. a hash reference)
+* C<"Can't import missing subroutine NAME"> -- the named subroutine is
+  listed in C<@EXPORT>, but is not defined in the ToolSet subclass
 
-* {"Can't import missing subroutine NAME"} -- the named subroutine is listed in
-{@EXPORT}, but is not defined in the ToolSet subclass
-
-= CONFIGURATION AND ENVIRONMENT
+=head1 CONFIGURATION AND ENVIRONMENT
 
 ToolSet requires no configuration files or environment variables.
 
-= DEPENDENCIES
+=head1 DEPENDENCIES
 
 ToolSet requires at least Perl 5.6.  ToolSet subclasses will, of course, be
 dependent on any modules they load.
 
-= SEE ALSO
+=head1 SEE ALSO
 
-Similar functionality is provided by the [Toolkit] module, though that 
+Similar functionality is provided by the L<Toolkit> module, though that
 module requires defining the bundle via text files found within directories
-in {PERL5LIB} and uses source filtering to insert their contents as files
+in C<PERL5LIB> and uses source filtering to insert their contents as files
 are compiled.
 
-=end wikidoc
+=cut
