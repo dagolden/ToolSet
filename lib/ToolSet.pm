@@ -4,7 +4,8 @@ use warnings;
 
 package ToolSet;
 # ABSTRACT: Load your commonly-used modules in a single import
-# VERSION
+
+our $VERSION = '1.02';
 
 use Carp;
 

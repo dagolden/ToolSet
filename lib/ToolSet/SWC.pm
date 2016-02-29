@@ -3,7 +3,8 @@ use warnings;
 
 package ToolSet::SWC;
 # ABSTRACT: Sample toolset with strict, warnings and Carp
-# VERSION
+
+our $VERSION = '1.02';
 
 use base 'ToolSet';
 
