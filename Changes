@@ -2,6 +2,11 @@ Revision history for ToolSet
 
 {{$NEXT}}
 
+    [ADDED]
+
+    - Added support for exact control of white space when constructing
+      an import line.
+
 1.01      2014-02-27 11:02:19-05:00 America/New_York
 
     [CHANGED]

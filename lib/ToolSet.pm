@@ -63,6 +63,10 @@ sub import {
             my $args = join( q{ } => @$request );
             $evaltext = "package $caller; use $mod qw( $args )";
         }
+        elsif ( ref $request eq 'SCALAR' ) {
+            my $args = $$request;
+            $evaltext = "package $caller; use $mod $args";
+        }
         elsif ( ref( \$request ) eq 'SCALAR' ) {
             $evaltext = "package $caller; use $mod qw( $request )";
         }
@@ -217,7 +221,7 @@ provided to C<use()>:
 
 Elements in an array are passed to C<use()> as a white-space separated
 list, so elements may not themselves contain spaces or unexpected results
-will occur.
+will occur.  (But read further below about exact whitespace handling.)
 
 As of version 1.00, modules may be repeated multiple times.  This is useful
 with modules like L<autouse>.
@@ -227,7 +231,14 @@ with modules like L<autouse>.
       autouse => [ 'Scalar::Util' => qw(refaddr blessed) ],
     );
 
-=head2 C<use_pragma>
+As of version 1.02, if you need exact handling of whitespace, pass a
+reference to a string and it will be used verbatim:
+
+    'Foo' => \'-foo => { bar => "Some thing with spaces" }'
+
+    #  use Foo -foo => { bar => "Some thing with spaces" }'
+
+=head C<use_pragma>
 
   ToolSet->use_pragma( 'strict' );         # use strict;
   ToolSet->use_pragma( 'feature', ':5.10' ); # use feature ':5.10';
