@@ -11,7 +11,7 @@ sub unimport {
 }
 
 sub in_effect {
-    my $level = shift // 0;
+    my $level = shift || 0;
     my $hinthash = ( caller($level) )[10];
     return $hinthash->{bogopragma};
 }
