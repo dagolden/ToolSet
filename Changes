@@ -2,6 +2,8 @@ Revision history for ToolSet
 
 {{$NEXT}}
 
+1.02      2016-03-10 21:01:23-05:00 America/New_York
+
     [ADDED]
 
     - Added support for exact control of white space when constructing
