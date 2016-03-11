@@ -238,7 +238,7 @@ reference to a string and it will be used verbatim:
 
     #  use Foo -foo => { bar => "Some thing with spaces" }'
 
-=head C<use_pragma>
+=head2 C<use_pragma>
 
   ToolSet->use_pragma( 'strict' );         # use strict;
   ToolSet->use_pragma( 'feature', ':5.10' ); # use feature ':5.10';
