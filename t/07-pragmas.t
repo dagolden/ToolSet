@@ -1,5 +1,6 @@
 use strict;
 use lib 't/lib';
+use lib '.';
 use Test::More;
 
 if ( $] >= 5.009 ) {
